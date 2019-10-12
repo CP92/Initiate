@@ -80,23 +80,28 @@ class CreatureDetailsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     saveButton.setOnClickListener {
-      val initiativeBox = view.findViewById<EditText>(R.id.initiative)
-      val initiative = initiativeBox.text.toString()
-      val nameBox = view.findViewById<EditText>(R.id.name)
-      val name = nameBox.text.toString()
-      val id = nameBox.tag.toString()
-      listener.onCreatureSave(name, initiative, id)
+
+      listener.onCreatureSave(getCreatureFromFragment(view))
     }
     deleteCreature.setOnClickListener {
-      val nameBox = view.findViewById<EditText>(R.id.name)
-      val id = nameBox.tag.toString()
-      listener.onCreatureDelete(id)
+
+      listener.onCreatureDelete(getCreatureFromFragment(view))
     }
 
   }
 
+  fun getCreatureFromFragment(view: View): CreatureModel {
+    val initiativeBox = view.findViewById<EditText>(R.id.initiative)
+    val initiative = initiativeBox.text.toString()
+    val turn = initiativeBox.tag.toString().toBoolean()
+    val nameBox = view.findViewById<EditText>(R.id.name)
+    val name = nameBox.text.toString()
+    val id = nameBox.tag.toString().toInt()
+    return CreatureModel(name, initiative, id, turn)
+  }
+
   interface OnCreatureAction{
-    fun onCreatureSave(name: String, initiative: String, id: String)
-    fun onCreatureDelete(id: String)
+    fun onCreatureSave(creature: CreatureModel)
+    fun onCreatureDelete(creature: CreatureModel)
   }
 }

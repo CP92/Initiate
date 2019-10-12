@@ -35,5 +35,6 @@ import java.io.Serializable
 data class CreatureModel(
                          val name: String,
                          val initiative: String,
-                         val id: Int,
+                         var id: Int,
+                         var turn: Boolean,
                          var text: String = "") : Serializable

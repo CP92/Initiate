@@ -44,38 +44,35 @@ import android.support.v7.widget.LinearLayoutManager
 class CreatureListFragment : Fragment() {
 
   private lateinit var listener: onCreatureSelected
-  private lateinit var creatureList: MutableList<Map<String, String>>
+  private lateinit var creatureList: MutableList<CreatureModel>
 
   companion object {
 
-    val creatures = mutableMapOf<Int,Array<String>>()
-    fun newInstance(name: String, initiative: String, id: Int): CreatureListFragment {
+    val creatures = mutableMapOf<Int, CreatureModel>()
+    fun newInstance(newCreatures: Array<CreatureModel>): CreatureListFragment {
 
-      if (id != 0) {
-        if (name == "") {
-          creatures.remove(id)
-          val args = Bundle()
-          val fragment = CreatureListFragment()
-          fragment.arguments = args
-          return fragment
-        }
-        creatures[id] = arrayOf(name, initiative)
-        val args = Bundle()
-        val fragment = CreatureListFragment()
-        fragment.arguments = args
-        return fragment
-      }
-      var idSetSuccess = false
-      var iD = creatures.size + 1
-      while (idSetSuccess == false) {
-        if (creatures.containsKey(iD)) {
-          iD++
-        } else {
-          idSetSuccess = true
-        }
-      }
+      for (creature in newCreatures) {
+      if (creature.id != 0) {
+        if (creature.name == "") {
+          creatures.remove(creature.id)
 
-      creatures[iD] = arrayOf(name, initiative)
+        }
+        creatures[creature.id] = creature
+
+      } else {
+        var idSetSuccess = false
+        var iD = creatures.size + 1
+        while (idSetSuccess == false) {
+          if (creatures.containsKey(iD)) {
+            iD++
+          } else {
+            idSetSuccess = true
+          }
+        }
+        creature.id = iD
+        creatures[iD] = creature
+      }
+      }
       val args = Bundle()
       val fragment = CreatureListFragment()
       fragment.arguments = args
@@ -94,16 +91,15 @@ class CreatureListFragment : Fragment() {
     }
     val ids = creatures.keys
 
-    val creatureMaps = mutableListOf<Map<String, String>>()
+    val creatureMaps = mutableListOf<CreatureModel>()
 
     for (id in ids) {
-      val list = creatures[id]
-      val name = list?.get(0)
-      val initiative = list?.get(1)
-      creatureMaps.add(mutableMapOf("id" to id.toString(), "name" to name!!, "initiative" to initiative!!))
+      val creature = creatures[id]
+
+      creatureMaps.add(creature!!)
     }
 
-    creatureMaps.sortByDescending { it["initiative"]?.toInt() }
+    creatureMaps.sortByDescending { it.initiative.toInt() }
 
     creatureList = creatureMaps
   }
@@ -131,10 +127,7 @@ class CreatureListFragment : Fragment() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-      val creature = CreatureModel(creatureList[position]["name"].toString(),
-        creatureList[position]["initiative"].toString(),
-        creatureList[position]["id"]!!.toInt()
-      )
+      val creature = creatureList[position]
       viewHolder.setData(creature)
       viewHolder.itemView.setOnClickListener {
         listener.onCreatureSelected(creature)

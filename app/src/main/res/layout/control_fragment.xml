@@ -8,6 +8,7 @@
     android:layout_gravity="bottom"
     tools:context=".ControlFragment">
 
+
     <Button
         android:id="@+id/backButton"
         android:layout_width="118dp"
@@ -47,7 +48,7 @@
         android:layout_marginEnd="1dp"
         android:autoText="false"
         android:background="#FFD600"
-        android:text="Round: "
+        android:text="Start Round"
         android:textAlignment="center"
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
