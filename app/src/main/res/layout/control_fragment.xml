@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    tools:context=".ControlFragment">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="118dp"
+        android:layout_height="61dp"
+        android:background="#D50000"
+        android:text="Back     Initiative"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/forwardButton"
+        android:layout_width="137dp"
+        android:layout_height="61dp"
+        android:background="#00C853"
+        android:text="Forward Initiative"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCreatureButton"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addCreatureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:clickable="true"
+        android:cropToPadding="false"
+        android:paddingBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/roundButton"
+        android:layout_width="154dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:autoText="false"
+        android:background="#FFD600"
+        android:text="Round: "
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/forwardButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/backButton" />
+
+</android.support.constraint.ConstraintLayout>
