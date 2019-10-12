@@ -52,7 +52,7 @@
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/forwardButton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toEndOf="@+id/backButton" />
 
 </android.support.constraint.ConstraintLayout>
